@@ -1,8 +1,7 @@
 aid: walk-score
 name: Walk Score
 description: >-
-  This API returns the Walk Score, Transit Score and Bike Score for any
-  location 
+  This API returns the Walk Score, Transit Score and Bike Score for any location.
 type: Index
 position: Consumer
 access: 3rd-Party
@@ -18,8 +17,7 @@ apis:
   - aid: walk-score:walk-score
     name: Walk Score
     description: >-
-      This API returns the Walk Score, Transit Score and Bike Score for any
-      location 
+      This API returns the Walk Score, Transit Score and Bike Score for any location.
     humanURL: ' https://www.walkscore.com/professional/api.php'
     tags:
       - API
