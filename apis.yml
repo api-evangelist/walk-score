@@ -6,8 +6,7 @@ type: Index
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-tags:
-  - API
+tags: []
 created: '2025-03-01'
 modified: '2026-03-16'
 url: >-
@@ -19,8 +18,7 @@ apis:
     description: >-
       This API returns the Walk Score, Transit Score and Bike Score for any location.
     humanURL: ' https://www.walkscore.com/professional/api.php'
-    tags:
-      - API
+    tags: []
     properties:
       - type: Documentation
         url: ' https://www.walkscore.com/professional/api.php'
