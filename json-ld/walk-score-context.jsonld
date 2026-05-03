@@ -1,0 +1,72 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "gtfs": "http://vocab.gtfs.org/terms#",
+    "ws": "https://www.walkscore.com/vocab/",
+
+    "WalkScore": "ws:WalkScore",
+    "TransitScore": "ws:TransitScore",
+    "BikeScore": "ws:BikeScore",
+    "walkscore": "ws:walkScore",
+    "transit_score": "ws:transitScore",
+    "bike_score": "ws:bikeScore",
+    "description": "schema:description",
+    "updated": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+
+    "lat": {
+      "@id": "geo:lat",
+      "@type": "xsd:decimal"
+    },
+    "lon": {
+      "@id": "geo:long",
+      "@type": "xsd:decimal"
+    },
+    "snapped_lat": "ws:snappedLat",
+    "snapped_lon": "ws:snappedLon",
+
+    "ws_link": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "logo_url": {
+      "@id": "schema:logo",
+      "@type": "@id"
+    },
+
+    "TransitStop": "gtfs:Stop",
+    "id": "@id",
+    "name": "schema:name",
+    "distance": "schema:distance",
+    "summary_text": "schema:description",
+    "route_ids": "gtfs:routeIds",
+
+    "TransitRoute": "gtfs:Route",
+    "short_name": "gtfs:shortName",
+    "long_name": "gtfs:longName",
+    "category": "gtfs:routeType",
+    "agency": {
+      "@id": "gtfs:agency",
+      "@type": "gtfs:Agency"
+    },
+    "agency_url": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "color": "gtfs:color",
+    "text_color": "gtfs:textColor",
+    "stop_ids": "gtfs:stopIds",
+    "geometry_wkt": "schema:polygon",
+
+    "SupportedCity": "schema:City",
+    "city": "schema:name",
+    "state": "schema:addressRegion",
+    "country": "schema:addressCountry",
+    "population": "schema:population"
+  }
+}

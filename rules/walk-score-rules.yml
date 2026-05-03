@@ -1,0 +1,90 @@
+extends: [[spectral:oas, recommended]]
+rules:
+  walk-score-api-key-required:
+    description: All Walk Score API requests must include the wsapikey parameter
+    message: "Walk Score API operations must require wsapikey authentication parameter"
+    severity: error
+    given: "$.paths[*][get].parameters[*]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          if:
+            properties:
+              name:
+                const: wsapikey
+          then:
+            properties:
+              required:
+                const: true
+
+  walk-score-https-only:
+    description: All Walk Score API server URLs must use HTTPS
+    message: "Server URL must use HTTPS"
+    severity: error
+    given: "$.servers[*].url"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://"
+
+  walk-score-operation-ids:
+    description: All Walk Score API operations must have operationId
+    message: "Operation must have an operationId"
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: operationId
+      function: truthy
+
+  walk-score-operation-summaries:
+    description: All Walk Score API operations must have a summary in Title Case
+    message: "Operation must have a summary"
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: summary
+      function: truthy
+
+  walk-score-lat-lon-params:
+    description: Walk Score location endpoints should document lat and lon parameters
+    message: "Location-based endpoints should include lat and lon parameters"
+    severity: warn
+    given: "$.paths[*][get].parameters"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          contains:
+            type: object
+            properties:
+              name:
+                pattern: "^(lat|lon)$"
+
+  walk-score-json-format-support:
+    description: Walk Score API endpoints should support JSON response format
+    message: "API should support JSON response format"
+    severity: warn
+    given: "$.paths[*][get].responses[200].content"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+            - "application/json"
+
+  walk-score-status-codes:
+    description: Walk Score API responses should include error status codes
+    message: "Walk Score operations should document 400 error responses"
+    severity: warn
+    given: "$.paths[*][get].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+            - "400"

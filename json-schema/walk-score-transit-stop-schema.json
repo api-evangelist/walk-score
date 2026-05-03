@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/walk-score/main/json-schema/walk-score-transit-stop-schema.json",
+  "title": "Walk Score Transit Stop",
+  "description": "Schema for a transit stop returned by the Walk Score Transit API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique stop identifier",
+      "pattern": "^s[0-9]+$",
+      "example": "s17737"
+    },
+    "lat": {
+      "type": "number",
+      "format": "double",
+      "description": "Stop latitude coordinate"
+    },
+    "lon": {
+      "type": "number",
+      "format": "double",
+      "description": "Stop longitude coordinate"
+    },
+    "name": {
+      "type": "string",
+      "description": "Stop name, typically an intersection or landmark",
+      "example": "2nd Ave & Stewart St"
+    },
+    "distance": {
+      "type": "number",
+      "format": "double",
+      "description": "Distance in miles from the search coordinates"
+    },
+    "summary_text": {
+      "type": "string",
+      "description": "Plain text description of the stop and its services"
+    },
+    "summary_html": {
+      "type": "string",
+      "description": "HTML-formatted description of the stop and services"
+    },
+    "route_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^r[0-9]+$"
+      },
+      "description": "List of route IDs serving this stop"
+    },
+    "route_summary": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/RouteSummary"
+      },
+      "description": "Detailed route information for routes serving this stop"
+    }
+  },
+  "required": ["id", "lat", "lon", "name"],
+  "$defs": {
+    "RouteSummary": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Route identifier",
+          "pattern": "^r[0-9]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Route name"
+        },
+        "short_name": {
+          "type": "string",
+          "description": "Short route identifier (e.g. E, Q8, 101)"
+        },
+        "long_name": {
+          "type": "string",
+          "description": "Full route name"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["Rail", "Bus", "Other"],
+          "description": "Transit mode category"
+        },
+        "agency": {
+          "type": "string",
+          "description": "Transit agency operating this route"
+        },
+        "agency_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Transit agency website URL"
+        },
+        "color": {
+          "type": "string",
+          "description": "Route brand color as 6-digit hex (no #)",
+          "pattern": "^[0-9A-Fa-f]{6}$"
+        },
+        "text_color": {
+          "type": "string",
+          "description": "Route text color as 6-digit hex (no #)",
+          "pattern": "^[0-9A-Fa-f]{6}$"
+        },
+        "description": {
+          "type": "string",
+          "description": "Route description"
+        }
+      },
+      "required": ["id", "name", "category", "agency"]
+    }
+  }
+}

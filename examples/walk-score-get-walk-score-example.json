@@ -1,0 +1,41 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.walkscore.com/score",
+    "parameters": {
+      "format": "json",
+      "address": "1119 8th Avenue Seattle WA",
+      "lat": 47.6085,
+      "lon": -122.3295,
+      "transit": 1,
+      "bike": 1,
+      "wsapikey": "YOUR_API_KEY"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "status": 1,
+      "walkscore": 98,
+      "description": "Walker's Paradise",
+      "updated": "2026-05-03 01:24:22.000000",
+      "logo_url": "https://cdn.walk.sc/images/api-logo.png",
+      "more_info_icon": "https://cdn.walk.sc/images/api-more-info.gif",
+      "more_info_link": "https://www.redfin.com/how-walk-score-works",
+      "ws_link": "https://www.walkscore.com/score/loc/lat=47.6085/lng=-122.3295/",
+      "help_link": "https://www.walkscore.com/how-it-works/",
+      "snapped_lat": 47.6085,
+      "snapped_lon": -122.3295,
+      "transit": {
+        "score": 100,
+        "description": "World-Class Transit",
+        "summary": "273 nearby routes: 267 bus, 4 rail, 2 other",
+        "help_link": "https://www.walkscore.com/how-it-works/"
+      },
+      "bike": {
+        "score": 73,
+        "description": "Very Bikeable"
+      }
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/walk-score/main/json-schema/walk-score-score-schema.json",
+  "title": "Walk Score Response",
+  "description": "Schema for a Walk Score API response including Walk Score, Transit Score, and Bike Score",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "integer",
+      "description": "API response status code",
+      "enum": [1, 2, 30, 31, 40, 41, 42],
+      "x-enum-descriptions": {
+        "1": "Success",
+        "2": "Score not yet available - try again later",
+        "30": "Invalid latitude/longitude coordinates",
+        "31": "Score server internal error",
+        "40": "Invalid API key",
+        "41": "API key quota exceeded",
+        "42": "IP address blocked"
+      }
+    },
+    "walkscore": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Walk Score from 0 (car-dependent) to 100 (walker's paradise)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable walkability description",
+      "examples": [
+        "Walker's Paradise",
+        "Very Walkable",
+        "Somewhat Walkable",
+        "Car-Dependent",
+        "Almost All Errands Require a Car"
+      ]
+    },
+    "updated": {
+      "type": "string",
+      "description": "Timestamp when the score was last updated"
+    },
+    "logo_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the Walk Score branded logo for required display"
+    },
+    "more_info_icon": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL for the more info icon image"
+    },
+    "more_info_link": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL for more information about how Walk Score works"
+    },
+    "ws_link": {
+      "type": "string",
+      "format": "uri",
+      "description": "Walk Score page URL for this specific location"
+    },
+    "help_link": {
+      "type": "string",
+      "format": "uri",
+      "description": "Walk Score methodology documentation URL"
+    },
+    "snapped_lat": {
+      "type": "number",
+      "format": "double",
+      "description": "Rounded latitude coordinate snapped to ~500-foot grid cell"
+    },
+    "snapped_lon": {
+      "type": "number",
+      "format": "double",
+      "description": "Rounded longitude coordinate snapped to ~500-foot grid cell"
+    },
+    "transit": {
+      "type": "object",
+      "description": "Transit Score data, present when transit=1 is requested",
+      "properties": {
+        "score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Transit Score from 0 to 100"
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable transit description",
+          "examples": ["World-Class Transit", "Excellent Transit", "Good Transit", "Some Transit", "Minimal Transit"]
+        },
+        "summary": {
+          "type": "string",
+          "description": "Summary of nearby transit routes by category",
+          "example": "273 nearby routes: 267 bus, 4 rail, 2 other"
+        },
+        "help_link": {
+          "type": "string",
+          "format": "uri",
+          "description": "Transit Score methodology documentation URL"
+        }
+      }
+    },
+    "bike": {
+      "type": "object",
+      "description": "Bike Score data, present when bike=1 is requested",
+      "properties": {
+        "score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Bike Score from 0 to 100"
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable bikeability description",
+          "examples": ["Biker's Paradise", "Very Bikeable", "Bikeable", "Some Bike Infrastructure"]
+        }
+      }
+    }
+  },
+  "required": ["status"]
+}

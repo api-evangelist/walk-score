@@ -1,0 +1,74 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://transit.walkscore.com/transit/search/stops/",
+    "parameters": {
+      "lat": 40.6678248,
+      "lon": -73.8330133,
+      "wsapikey": "YOUR_API_KEY"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": [
+      {
+        "id": "s23451",
+        "lat": 40.6682105,
+        "lon": -73.8335892,
+        "name": "Jamaica Ave & 165th St",
+        "distance": 0.04,
+        "summary_text": "0.0 miles away, serving 3 routes",
+        "summary_html": "<strong>0.0 mi</strong> — Q8, Q9, Q85",
+        "route_summary": [
+          {
+            "id": "r1021",
+            "name": "Q8",
+            "short_name": "Q8",
+            "long_name": "Jamaica - St. Albans",
+            "category": "Bus",
+            "agency": "MTA Bus Company",
+            "agency_url": "https://new.mta.info/",
+            "color": "EE352E",
+            "text_color": "FFFFFF",
+            "description": "Jamaica Ave corridor bus route"
+          },
+          {
+            "id": "r1022",
+            "name": "Q9",
+            "short_name": "Q9",
+            "long_name": "Jamaica - St. Albans via Farmers Blvd",
+            "category": "Bus",
+            "agency": "MTA Bus Company",
+            "agency_url": "https://new.mta.info/",
+            "color": "EE352E",
+            "text_color": "FFFFFF",
+            "description": "Local bus route"
+          }
+        ]
+      },
+      {
+        "id": "s23452",
+        "lat": 40.6695022,
+        "lon": -73.8329944,
+        "name": "Jamaica - Van Wyck",
+        "distance": 0.12,
+        "summary_text": "0.1 miles away, E train, Jamaica-Jamaica stop",
+        "summary_html": "<strong>0.1 mi</strong> — E",
+        "route_summary": [
+          {
+            "id": "r501",
+            "name": "E",
+            "short_name": "E",
+            "long_name": "Jamaica - World Trade Center",
+            "category": "Rail",
+            "agency": "MTA New York City Transit",
+            "agency_url": "https://new.mta.info/",
+            "color": "0039A6",
+            "text_color": "FFFFFF",
+            "description": "Subway E train"
+          }
+        ]
+      }
+    ]
+  }
+}

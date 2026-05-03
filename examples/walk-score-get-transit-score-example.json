@@ -1,0 +1,25 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://transit.walkscore.com/transit/score/",
+    "parameters": {
+      "lat": 47.6101359,
+      "lon": -122.3420567,
+      "city": "Seattle",
+      "state": "WA",
+      "wsapikey": "YOUR_API_KEY"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "scored_lat": 47.6101359,
+      "scored_lon": -122.3420567,
+      "transit_score": 100,
+      "description": "World-Class",
+      "summary": "266 nearby routes: 260 bus, 4 rail, 2 other",
+      "ws_link": "https://www.walkscore.com/WA/Seattle",
+      "help_link": "https://www.walkscore.com/transit-score-methodology.shtml"
+    }
+  }
+}

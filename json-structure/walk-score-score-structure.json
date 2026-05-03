@@ -1,0 +1,109 @@
+{
+  "title": "Walk Score API Response Structure",
+  "description": "JSON structure documentation for the Walk Score API response",
+  "type": "object",
+  "fields": [
+    {
+      "name": "status",
+      "type": "integer",
+      "description": "API response status. 1=success, 2=pending, 30/31=error, 40/41/42=auth error",
+      "example": 1,
+      "required": true
+    },
+    {
+      "name": "walkscore",
+      "type": "integer",
+      "description": "Walk Score from 0 (car-dependent) to 100 (walker's paradise)",
+      "example": 98,
+      "required": false
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "description": "Human-readable walkability description",
+      "example": "Walker's Paradise",
+      "required": false
+    },
+    {
+      "name": "updated",
+      "type": "string",
+      "description": "Timestamp of last score update",
+      "example": "2026-05-03 01:24:22.000000",
+      "required": false
+    },
+    {
+      "name": "logo_url",
+      "type": "string",
+      "description": "Walk Score branded logo URL for required attribution display",
+      "example": "https://cdn.walk.sc/images/api-logo.png",
+      "required": false
+    },
+    {
+      "name": "ws_link",
+      "type": "string",
+      "description": "Walk Score page URL for this location",
+      "example": "https://www.walkscore.com/score/loc/lat=47.6085/lng=-122.3295/",
+      "required": false
+    },
+    {
+      "name": "snapped_lat",
+      "type": "number",
+      "description": "Latitude rounded to ~500-foot grid cell",
+      "example": 47.6085,
+      "required": false
+    },
+    {
+      "name": "snapped_lon",
+      "type": "number",
+      "description": "Longitude rounded to ~500-foot grid cell",
+      "example": -122.3295,
+      "required": false
+    },
+    {
+      "name": "transit",
+      "type": "object",
+      "description": "Transit Score object, present when transit=1 is requested",
+      "required": false,
+      "fields": [
+        {
+          "name": "score",
+          "type": "integer",
+          "description": "Transit Score 0-100",
+          "example": 100
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "Transit quality description",
+          "example": "World-Class Transit"
+        },
+        {
+          "name": "summary",
+          "type": "string",
+          "description": "Count of nearby routes by mode",
+          "example": "273 nearby routes: 267 bus, 4 rail, 2 other"
+        }
+      ]
+    },
+    {
+      "name": "bike",
+      "type": "object",
+      "description": "Bike Score object, present when bike=1 is requested",
+      "required": false,
+      "fields": [
+        {
+          "name": "score",
+          "type": "integer",
+          "description": "Bike Score 0-100",
+          "example": 73
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "Bikeability description",
+          "example": "Very Bikeable"
+        }
+      ]
+    }
+  ]
+}

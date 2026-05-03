@@ -1,0 +1,121 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Walk Score API"
+  description: >-
+    Shared capability definition for the Walk Score API. Returns Walk Score,
+    Transit Score, and Bike Score for any location in the US and Canada.
+    Used for real estate listings, location analysis, and commute planning.
+  tags:
+    - Walk Score
+    - Walkability
+    - Location Intelligence
+    - Real Estate
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      WALKSCORE_API_KEY: WALKSCORE_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: walk-score-api
+      baseUri: https://api.walkscore.com
+      description: "Walk Score API for walkability, transit, and bike scores"
+      authentication:
+        type: apikey
+        key: wsapikey
+        value: "{{WALKSCORE_API_KEY}}"
+        placement: query
+      resources:
+        - name: scores
+          path: /score
+          description: "Get Walk Score, Transit Score, and Bike Score for a location"
+          operations:
+            - name: get-walk-score
+              method: GET
+              description: "Get walkability, transit, and bike scores for a lat/lon location"
+              inputParameters:
+                - name: lat
+                  in: query
+                  type: number
+                  required: true
+                  description: "Latitude coordinate"
+                - name: lon
+                  in: query
+                  type: number
+                  required: true
+                  description: "Longitude coordinate"
+                - name: address
+                  in: query
+                  type: string
+                  required: true
+                  description: "URL-encoded street address"
+                - name: transit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Set to 1 to include Transit Score"
+                - name: bike
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Set to 1 to include Bike Score"
+                - name: format
+                  in: query
+                  type: string
+                  required: false
+                  description: "Response format: json or xml"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8120
+      namespace: walk-score-rest-api
+      resources:
+        - path: /v1/scores
+          name: scores
+          description: "Get location walkability scores"
+          operations:
+            - method: GET
+              name: get-walk-score
+              description: "Get Walk Score, Transit Score, and Bike Score for a location"
+              call: "walk-score-api.get-walk-score"
+              with:
+                lat: "rest.lat"
+                lon: "rest.lon"
+                address: "rest.address"
+                transit: "rest.transit"
+                bike: "rest.bike"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9120
+      namespace: walk-score-mcp
+      transport: http
+      tools:
+        - name: get-walk-score
+          description: "Get the Walk Score, Transit Score, and Bike Score for any address or coordinates"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "walk-score-api.get-walk-score"
+          with:
+            lat: "tools.lat"
+            lon: "tools.lon"
+            address: "tools.address"
+            transit: "tools.transit"
+            bike: "tools.bike"
+            format: "json"
+          outputParameters:
+            - type: object
+              mapping: "$."

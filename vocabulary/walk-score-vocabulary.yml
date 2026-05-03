@@ -1,0 +1,109 @@
+info:
+  title: Walk Score API Vocabulary
+  description: >-
+    Vocabulary and taxonomy for the Walk Score API covering walkability, transit
+    accessibility, bikeability, and location intelligence domains.
+  version: 1.0.0
+  created: '2026-05-03'
+  modified: '2026-05-03'
+
+domains:
+  - name: Walkability
+    description: Pedestrian accessibility and walkability measurement concepts
+    terms:
+      - term: Walk Score
+        definition: >-
+          A numeric measure from 0 to 100 of how walkable an address is based on
+          proximity to amenities, pedestrian infrastructure, and block lengths.
+          Calculated using the Walk Score algorithm.
+        range:
+          - score: 90-100
+            label: "Walker's Paradise"
+            description: "Daily errands do not require a car"
+          - score: 70-89
+            label: "Very Walkable"
+            description: "Most errands can be accomplished on foot"
+          - score: 50-69
+            label: "Somewhat Walkable"
+            description: "Some errands can be accomplished on foot"
+          - score: 25-49
+            label: "Car-Dependent"
+            description: "Most errands require a car"
+          - score: 0-24
+            label: "Almost All Errands Require a Car"
+            description: "Almost all errands require a car"
+      - term: Snapped Coordinates
+        definition: >-
+          Rounded latitude/longitude coordinates aligned to Walk Score's internal
+          ~500-foot grid cell, ensuring consistent scores for the same block
+      - term: Walkability
+        definition: >-
+          The degree to which a location supports walking as a mode of transportation
+          for daily activities and errands
+
+  - name: Transit
+    description: Public transportation accessibility concepts
+    terms:
+      - term: Transit Score
+        definition: >-
+          A numeric measure from 0 to 100 of how well a location is served by
+          public transportation, calculated based on frequency, type, and distance
+          of nearby transit options.
+        range:
+          - score: 90-100
+            label: "World-Class Transit"
+          - score: 70-89
+            label: "Excellent Transit"
+          - score: 50-69
+            label: "Good Transit"
+          - score: 25-49
+            label: "Some Transit"
+          - score: 0-24
+            label: "Minimal Transit"
+      - term: Transit Stop
+        definition: A physical location where passengers board or disembark from public transit vehicles
+        synonyms: [Bus Stop, Rail Station, Ferry Terminal]
+      - term: Transit Route
+        definition: A defined path followed by a public transit vehicle on a regular schedule
+        synonyms: [Bus Line, Train Line, Transit Line]
+      - term: Transit Network
+        definition: All routes and stops within one mile of a given location
+      - term: Route Category
+        definition: The mode of transit for a route
+        values:
+          - Rail
+          - Bus
+          - Other
+
+  - name: Bikeability
+    description: Bicycle transportation accessibility concepts
+    terms:
+      - term: Bike Score
+        definition: >-
+          A numeric measure from 0 to 100 of how bikeable a location is, based on
+          bike infrastructure, topography, connectivity, and destinations.
+        range:
+          - score: 90-100
+            label: "Biker's Paradise"
+          - score: 70-89
+            label: "Very Bikeable"
+          - score: 50-69
+            label: "Bikeable"
+          - score: 0-49
+            label: "Some Bike Infrastructure"
+      - term: Bike Infrastructure
+        definition: Physical infrastructure supporting bicycle transportation including bike lanes, paths, and trails
+
+  - name: Location Intelligence
+    description: Geographic and location data concepts
+    terms:
+      - term: API Key
+        abbreviation: wsapikey
+        definition: Authentication credential for accessing the Walk Score API, obtained by registering at walkscore.com
+      - term: WKT Geometry
+        abbreviation: WKT
+        definition: Well-Known Text format string representing the geographic path of a transit route
+      - term: Supported City
+        definition: A city for which Walk Score has transit data enabling Transit Score calculation
+      - term: Server-Side Calls
+        definition: Requirement that Walk Score API calls be made from server-side scripts rather than directly from client browsers
