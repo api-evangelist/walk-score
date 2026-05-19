@@ -1,0 +1,89 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Walk Score Transit API — Routes
+  description: 'Walk Score Transit API — Routes. 1 operations. Lead operation: Get Transit Route. Self-contained Naftiko capability
+    covering one Walk Score business surface.'
+  tags:
+  - Walk Score
+  - Routes
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WALK_SCORE_API_KEY: WALK_SCORE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: transit-routes
+    baseUri: https://transit.walkscore.com
+    description: Walk Score Transit API — Routes business capability. Self-contained, no shared references.
+    resources:
+    - name: transit-route-routeId
+      path: /transit/route/{routeId}/
+      operations:
+      - name: gettransitroute
+        method: GET
+        description: Get Transit Route
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: routeId
+          in: path
+          type: string
+          description: Route identifier (e.g. r403)
+          required: true
+        - name: wsapikey
+          in: query
+          type: string
+          description: Your Walk Score API key
+          required: true
+    authentication:
+      type: apikey
+      key: wsapikey
+      value: '{{env.WALK_SCORE_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: transit-routes-rest
+    port: 8080
+    description: REST adapter for Walk Score Transit API — Routes. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/transit/route/{routeid}
+      name: transit-route-routeid
+      description: REST surface for transit-route-routeId.
+      operations:
+      - method: GET
+        name: gettransitroute
+        description: Get Transit Route
+        call: transit-routes.gettransitroute
+        with:
+          routeId: rest.routeId
+          wsapikey: rest.wsapikey
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: transit-routes-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Walk Score Transit API — Routes. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-transit-route
+      description: Get Transit Route
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: transit-routes.gettransitroute
+      with:
+        routeId: tools.routeId
+        wsapikey: tools.wsapikey
+      outputParameters:
+      - type: object
+        mapping: $.

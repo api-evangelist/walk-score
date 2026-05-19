@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Walk Score Transit API — Cities
+  description: 'Walk Score Transit API — Cities. 1 operations. Lead operation: List Supported Cities. Self-contained Naftiko
+    capability covering one Walk Score business surface.'
+  tags:
+  - Walk Score
+  - Cities
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WALK_SCORE_API_KEY: WALK_SCORE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: transit-cities
+    baseUri: https://transit.walkscore.com
+    description: Walk Score Transit API — Cities business capability. Self-contained, no shared references.
+    resources:
+    - name: transit-supported-cities
+      path: /transit/supported/cities/
+      operations:
+      - name: listsupportedcities
+        method: GET
+        description: List Supported Cities
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: wsapikey
+          in: query
+          type: string
+          description: Your Walk Score API key
+          required: true
+    authentication:
+      type: apikey
+      key: wsapikey
+      value: '{{env.WALK_SCORE_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: transit-cities-rest
+    port: 8080
+    description: REST adapter for Walk Score Transit API — Cities. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/transit/supported/cities
+      name: transit-supported-cities
+      description: REST surface for transit-supported-cities.
+      operations:
+      - method: GET
+        name: listsupportedcities
+        description: List Supported Cities
+        call: transit-cities.listsupportedcities
+        with:
+          wsapikey: rest.wsapikey
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: transit-cities-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Walk Score Transit API — Cities. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-supported-cities
+      description: List Supported Cities
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: transit-cities.listsupportedcities
+      with:
+        wsapikey: tools.wsapikey
+      outputParameters:
+      - type: object
+        mapping: $.
