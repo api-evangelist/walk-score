@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Walk Score API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "wsapikey",
+      "value": "{{wsapikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Scores",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Walk Score",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.walkscore.com/score",
+            "params": [
+              {
+                "name": "wsapikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Walk Score API key"
+              },
+              {
+                "name": "lat",
+                "value": "47.6085",
+                "type": "query",
+                "description": "Latitude of the location"
+              },
+              {
+                "name": "lon",
+                "value": "-122.3295",
+                "type": "query",
+                "description": "Longitude of the location"
+              },
+              {
+                "name": "address",
+                "value": "1119 8th Avenue Seattle WA",
+                "type": "query",
+                "description": "URL-encoded street address of the location"
+              },
+              {
+                "name": "transit",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 to include Transit Score in the response"
+              },
+              {
+                "name": "bike",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 to include Bike Score in the response"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format. Defaults to XML if not specified"
+              }
+            ]
+          },
+          "docs": "Returns the Walk Score, Transit Score, and Bike Score for a given location specified by coordinates and address. Walk Score is returned for all requests. Transit Score and Bike Score are optional and must be explicitly requested. Scores range from 0 (car-dependent) to 100 (walker's/transit/biker's paradise). Calls must be made from server-side scripts. API is supported in the United States and Canada."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

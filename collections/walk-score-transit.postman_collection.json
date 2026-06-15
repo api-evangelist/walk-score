@@ -1,0 +1,1051 @@
+{
+  "item": [
+    {
+      "id": "aa753634-580f-4cae-82d2-dd002cc5ecde",
+      "name": "Scores",
+      "description": {
+        "content": "Transit scores for locations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "58795d26-8f96-4bfa-bf3f-396bf09e280d",
+          "name": "Get Transit Score",
+          "request": {
+            "name": "Get Transit Score",
+            "description": {
+              "content": "Returns a Transit Score (integer 0-100) and English description for a specific city and location. The score represents relative access to public transit. A score of 100 means World-Class Transit, while lower scores indicate less transit access. All successful requests return HTTP 200 with JSON.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transit",
+                "score",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "wsapikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Walk Score API key"
+                },
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<double>",
+                  "description": "(Required) Latitude to score"
+                },
+                {
+                  "disabled": false,
+                  "key": "lon",
+                  "value": "<double>",
+                  "description": "(Required) Longitude to score"
+                },
+                {
+                  "disabled": false,
+                  "key": "city",
+                  "value": "<string>",
+                  "description": "(Required) City name"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Two-letter USPS state code (required for US cities)"
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "Two-letter ISO-3166 country code (required for non-US cities)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "efe61529-4711-4cd9-8571-e802544aeb44",
+              "name": "Transit score result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transit",
+                    "score",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wsapikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "47.6101359"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.3420567"
+                    },
+                    {
+                      "key": "city",
+                      "value": "Seattle"
+                    },
+                    {
+                      "key": "state",
+                      "value": "WA"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wsapikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"scored_lat\": 47.6101359,\n  \"scored_lon\": -122.3420567,\n  \"transit_score\": 100,\n  \"description\": \"World-Class\",\n  \"summary\": \"266 nearby routes: 260 bus, 4 rail, 2 other\",\n  \"ws_link\": \"https://www.walkscore.com/WA/Seattle\",\n  \"help_link\": \"https://www.walkscore.com/transit-score-methodology.shtml\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25cdbf80-e24d-4526-bd65-b25a5ae98153",
+              "name": "Unsupported city/state combination or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transit",
+                    "score",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wsapikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "47.6101359"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.3420567"
+                    },
+                    {
+                      "key": "city",
+                      "value": "Seattle"
+                    },
+                    {
+                      "key": "state",
+                      "value": "WA"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wsapikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "629e8af6-bd0f-4e96-b0b5-6a7eaf1c35c9",
+      "name": "Stops",
+      "description": {
+        "content": "Transit stop search and details",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "54fcd65c-c814-4aea-8b65-3eceb8989702",
+          "name": "Search Transit Stops",
+          "request": {
+            "name": "Search Transit Stops",
+            "description": {
+              "content": "Returns information about up to 16 transit stops near a given location, where each stop services a unique route. Each stop includes route details, distances, and summary text. Used to surface nearby transit options with route service information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transit",
+                "search",
+                "stops",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "wsapikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Walk Score API key"
+                },
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<double>",
+                  "description": "(Required) Search latitude"
+                },
+                {
+                  "disabled": false,
+                  "key": "lon",
+                  "value": "<double>",
+                  "description": "(Required) Search longitude"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9ad9ccc-02fa-42ba-a837-026738cf2edd",
+              "name": "Array of nearby transit stops with route information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transit",
+                    "search",
+                    "stops",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wsapikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "40.6678248"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-73.8330133"
+                    },
+                    {
+                      "key": "wsapikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"s17737\",\n    \"lat\": 1099.0187487060332,\n    \"lon\": 3652.655033043701,\n    \"name\": \"2nd Ave & Stewart St\",\n    \"distance\": 535.2178614526238,\n    \"summary_text\": \"string\",\n    \"summary_html\": \"string\",\n    \"route_summary\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"short_name\": \"string\",\n        \"long_name\": \"string\",\n        \"category\": \"Bus\",\n        \"agency\": \"string\",\n        \"agency_url\": \"http://sXLMSwfdMsJamsnzkmSxXfgnyXdApFUVg.gfqUoWDf7iZa.ZGp.WqIA,p3YaBLh9d2k3AMqCcfTmfKWXWc04rYLjDbNFe\",\n        \"color\": \"003087\",\n        \"text_color\": \"ffffff\",\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"short_name\": \"string\",\n        \"long_name\": \"string\",\n        \"category\": \"Bus\",\n        \"agency\": \"string\",\n        \"agency_url\": \"http://gNqotXfmNTwyEqVcQxWLFYJpadsoJrO.dcdqy6ix1XaJupo5lraQMSHhf\",\n        \"color\": \"003087\",\n        \"text_color\": \"ffffff\",\n        \"description\": \"string\"\n      }\n    ]\n  },\n  {\n    \"id\": \"s17737\",\n    \"lat\": 7401.706164057717,\n    \"lon\": 6730.731573533612,\n    \"name\": \"2nd Ave & Stewart St\",\n    \"distance\": 4663.389955881881,\n    \"summary_text\": \"string\",\n    \"summary_html\": \"string\",\n    \"route_summary\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"short_name\": \"string\",\n        \"long_name\": \"string\",\n        \"category\": \"Rail\",\n        \"agency\": \"string\",\n        \"agency_url\": \"https://PHCJxuLjgsytHtgzxP.frsphPHiunD0ST.0HEJJom31Wx5xYO\",\n        \"color\": \"003087\",\n        \"text_color\": \"ffffff\",\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"short_name\": \"string\",\n        \"long_name\": \"string\",\n        \"category\": \"Bus\",\n        \"agency\": \"string\",\n        \"agency_url\": \"http://FuoZsBbAhnkFXd.euwNUNjvelhYzMxinHzMWYpPqdXCHyBCLc76KM-qtok\",\n        \"color\": \"003087\",\n        \"text_color\": \"ffffff\",\n        \"description\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15bd8e7f-0da5-41c0-9137-3da847cfd917",
+              "name": "Invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transit",
+                    "search",
+                    "stops",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wsapikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "40.6678248"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-73.8330133"
+                    },
+                    {
+                      "key": "wsapikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8dd6cf4d-68d4-4437-84a5-21534285babb",
+          "name": "Search Transit Network",
+          "request": {
+            "name": "Search Transit Network",
+            "description": {
+              "content": "Advanced API call that returns detailed information about all routes and stops within one mile of a location. Returns a comprehensive network object with routes dictionary and stops dictionary, where routes contain stop IDs and stops contain route IDs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transit",
+                "search",
+                "network",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "wsapikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Walk Score API key"
+                },
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<double>",
+                  "description": "(Required) Search latitude"
+                },
+                {
+                  "disabled": false,
+                  "key": "lon",
+                  "value": "<double>",
+                  "description": "(Required) Search longitude"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e9c90be1-de5b-43ce-b021-8e79bcabcd41",
+              "name": "Transit network with all routes and stops within one mile",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transit",
+                    "search",
+                    "network",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wsapikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "40.6678248"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-73.8330133"
+                    },
+                    {
+                      "key": "wsapikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"routes\": {\n    \"key_0\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"category\": \"Rail\",\n      \"stop_ids\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  },\n  \"stops\": {\n    \"key_0\": {\n      \"id\": \"string\",\n      \"lat\": 5216.392861301661,\n      \"lon\": 2034.3475314881498,\n      \"name\": \"string\",\n      \"route_ids\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"key_1\": {\n      \"id\": \"string\",\n      \"lat\": 172.82421710066777,\n      \"lon\": 355.1136365253515,\n      \"name\": \"string\",\n      \"route_ids\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4cb48b6e-2e5a-448e-bde3-4c49e6dd1b94",
+              "name": "Invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transit",
+                    "search",
+                    "network",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wsapikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "40.6678248"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-73.8330133"
+                    },
+                    {
+                      "key": "wsapikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc556388-78c3-49da-be50-5973d006d30c",
+          "name": "Get Transit Stop",
+          "request": {
+            "name": "Get Transit Stop",
+            "description": {
+              "content": "Returns details for a single transit stop by its identifier, including coordinates, name, and list of route IDs that serve the stop.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transit",
+                "stop",
+                ":stopId",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "wsapikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Walk Score API key"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "stopId",
+                  "description": "(Required) Stop identifier (e.g. s17737)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "029df8e5-28a4-4fff-9d5b-06553b58b1b8",
+              "name": "Transit stop details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transit",
+                    "stop",
+                    ":stopId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wsapikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wsapikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stopId",
+                      "description": "(Required) Stop identifier (e.g. s17737)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"s17737\",\n  \"lat\": 47.6107025,\n  \"lon\": -122.340332,\n  \"name\": \"2nd Ave & Stewart St\",\n  \"route_ids\": [\n    \"r415\",\n    \"r282\",\n    \"r403\",\n    \"r375\",\n    \"r367\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1374c55f-607e-4d0b-9a03-0340be2cda2b",
+              "name": "Invalid stop ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transit",
+                    "stop",
+                    ":stopId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wsapikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wsapikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stopId",
+                      "description": "(Required) Stop identifier (e.g. s17737)"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d07988cb-3968-4a19-ab81-eb2b0bd39a86",
+      "name": "Routes",
+      "description": {
+        "content": "Transit route details",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c459c4e4-bbe2-4be0-8dbf-9e885dc5fb02",
+          "name": "Get Transit Route",
+          "request": {
+            "name": "Get Transit Route",
+            "description": {
+              "content": "Returns details for a single transit route by its identifier, including name, category (Rail/Bus/Other), agency information, color branding, stop IDs, and WKT geometry string for the route path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transit",
+                "route",
+                ":routeId",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "wsapikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Walk Score API key"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "routeId",
+                  "description": "(Required) Route identifier (e.g. r403)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b37e1671-3287-4873-a523-1a7f2a9ab2be",
+              "name": "Transit route details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transit",
+                    "route",
+                    ":routeId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wsapikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wsapikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) Route identifier (e.g. r403)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"short_name\": \"string\",\n  \"long_name\": \"string\",\n  \"category\": \"Rail\",\n  \"agency\": \"string\",\n  \"agency_url\": \"http://mOGKhxAC.uhvrlh3WDg8uyh9yWRWTjhFHH2S\",\n  \"color\": \"string\",\n  \"text_color\": \"string\",\n  \"description\": \"string\",\n  \"stop_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"geometry_wkt\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f72ff3dd-e01c-4c7a-bf92-10070d029c8a",
+              "name": "Invalid route ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transit",
+                    "route",
+                    ":routeId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wsapikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wsapikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) Route identifier (e.g. r403)"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "a817e6ce-8b8a-4d61-abfe-f11cd224595b",
+      "name": "Cities",
+      "description": {
+        "content": "Supported cities list",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8962b4e2-1ebe-4e46-9369-a2f580c85726",
+          "name": "List Supported Cities",
+          "request": {
+            "name": "List Supported Cities",
+            "description": {
+              "content": "Returns a list of all cities supported by the Transit Score API, including city name, state (US) or country code (non-US), and estimated population. Use this to validate city/state combinations before requesting transit scores.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transit",
+                "supported",
+                "cities",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "wsapikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Walk Score API key"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8d7e67b7-8ac2-4ad8-9a4d-27c48d448126",
+              "name": "Array of supported cities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transit",
+                    "supported",
+                    "cities",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wsapikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wsapikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"city\": \"Seattle\",\n    \"state\": \"WA\",\n    \"country\": \"string\",\n    \"population\": 737000\n  },\n  {\n    \"city\": \"Seattle\",\n    \"state\": \"WA\",\n    \"country\": \"string\",\n    \"population\": 737000\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6f7f9df-44ee-44e4-b0f8-177455ceabee",
+              "name": "Invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transit",
+                    "supported",
+                    "cities",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wsapikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wsapikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://transit.walkscore.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "wsapikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "02c93308-8f0f-4c33-aadb-bdb4aa2c3ee6",
+    "name": "Walk Score Transit API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Walk Score Public Transit API provides detailed transit data including Transit Scores, nearby stops, route networks, stop details, and route details. The API returns information about bus, rail, and other transit options within one mile of any location. Used by real estate platforms, commute calculators, and urban planning applications to surface public transportation options.",
+      "type": "text/plain"
+    }
+  }
+}

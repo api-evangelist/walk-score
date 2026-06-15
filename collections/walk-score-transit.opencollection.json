@@ -1,0 +1,230 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Walk Score Transit API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "wsapikey",
+      "value": "{{wsapikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Scores",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Transit Score",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://transit.walkscore.com/transit/score/",
+            "params": [
+              {
+                "name": "wsapikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Walk Score API key"
+              },
+              {
+                "name": "lat",
+                "value": "47.6101359",
+                "type": "query",
+                "description": "Latitude to score"
+              },
+              {
+                "name": "lon",
+                "value": "-122.3420567",
+                "type": "query",
+                "description": "Longitude to score"
+              },
+              {
+                "name": "city",
+                "value": "Seattle",
+                "type": "query",
+                "description": "City name"
+              },
+              {
+                "name": "state",
+                "value": "WA",
+                "type": "query",
+                "description": "Two-letter USPS state code (required for US cities)"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Two-letter ISO-3166 country code (required for non-US cities)"
+              }
+            ]
+          },
+          "docs": "Returns a Transit Score (integer 0-100) and English description for a specific city and location. The score represents relative access to public transit. A score of 100 means World-Class Transit, while lower scores indicate less transit access. All successful requests return HTTP 200 with JSON."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Stops",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Transit Stops",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://transit.walkscore.com/transit/search/stops/",
+            "params": [
+              {
+                "name": "wsapikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Walk Score API key"
+              },
+              {
+                "name": "lat",
+                "value": "40.6678248",
+                "type": "query",
+                "description": "Search latitude"
+              },
+              {
+                "name": "lon",
+                "value": "-73.8330133",
+                "type": "query",
+                "description": "Search longitude"
+              }
+            ]
+          },
+          "docs": "Returns information about up to 16 transit stops near a given location, where each stop services a unique route. Each stop includes route details, distances, and summary text. Used to surface nearby transit options with route service information."
+        },
+        {
+          "info": {
+            "name": "Search Transit Network",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://transit.walkscore.com/transit/search/network/",
+            "params": [
+              {
+                "name": "wsapikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Walk Score API key"
+              },
+              {
+                "name": "lat",
+                "value": "40.6678248",
+                "type": "query",
+                "description": "Search latitude"
+              },
+              {
+                "name": "lon",
+                "value": "-73.8330133",
+                "type": "query",
+                "description": "Search longitude"
+              }
+            ]
+          },
+          "docs": "Advanced API call that returns detailed information about all routes and stops within one mile of a location. Returns a comprehensive network object with routes dictionary and stops dictionary, where routes contain stop IDs and stops contain route IDs."
+        },
+        {
+          "info": {
+            "name": "Get Transit Stop",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://transit.walkscore.com/transit/stop/:stopId/",
+            "params": [
+              {
+                "name": "stopId",
+                "value": "s17737",
+                "type": "path",
+                "description": "Stop identifier (e.g. s17737)"
+              },
+              {
+                "name": "wsapikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Walk Score API key"
+              }
+            ]
+          },
+          "docs": "Returns details for a single transit stop by its identifier, including coordinates, name, and list of route IDs that serve the stop."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Routes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Transit Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://transit.walkscore.com/transit/route/:routeId/",
+            "params": [
+              {
+                "name": "routeId",
+                "value": "r403",
+                "type": "path",
+                "description": "Route identifier (e.g. r403)"
+              },
+              {
+                "name": "wsapikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Walk Score API key"
+              }
+            ]
+          },
+          "docs": "Returns details for a single transit route by its identifier, including name, category (Rail/Bus/Other), agency information, color branding, stop IDs, and WKT geometry string for the route path."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Cities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Supported Cities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://transit.walkscore.com/transit/supported/cities/",
+            "params": [
+              {
+                "name": "wsapikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Walk Score API key"
+              }
+            ]
+          },
+          "docs": "Returns a list of all cities supported by the Transit Score API, including city name, state (US) or country code (non-US), and estimated population. Use this to validate city/state combinations before requesting transit scores."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
