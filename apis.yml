@@ -77,7 +77,7 @@ common:
     url: https://www.walkscore.com/professional/api.php
   - type: Documentation
     url: https://walkscore-api.readthedocs.io/en/latest/
-  - type: SignUp
+  - type: Signup
     url: https://www.walkscore.com/professional/api-sign-up.php
 maintainers:
   - FN: Kin Lane
