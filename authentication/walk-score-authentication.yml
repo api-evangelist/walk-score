@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/walk-score-openapi.yml, openapi/walk-score-transit-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: apiKey
+  type: apiKey
+  in: query
+  parameter: wsapikey
+  description: Walk Score API key, contact Walk Score to obtain
+  sources:
+  - openapi/walk-score-openapi.yml
+  - openapi/walk-score-transit-openapi.yml
