@@ -69,6 +69,8 @@ apis:
         url: >-
           https://raw.githubusercontent.com/api-evangelist/walk-score/refs/heads/main/openapi/walk-score-transit-openapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/walk-score-agentic-access.yml
   - type: DomainSecurity
     url: security/walk-score-domain-security.yml
   - type: Authentication
