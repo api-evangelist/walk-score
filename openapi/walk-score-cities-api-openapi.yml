@@ -1,0 +1,68 @@
+openapi: 3.0.3
+info:
+  title: Walk Score Cities API
+  description: The Walk Score API returns Walk Score, Transit Score, and Bike Score for any location in the United States and Canada. Walk Score measures the walkability of any address on a scale from 0-100. Transit Score measures access to public transit and Bike Score measures bikeability. The API is used by real estate platforms, urban planning tools, commute calculators, and location intelligence applications.
+  version: 1.0.0
+  contact:
+    url: https://www.walkscore.com/professional/api.php
+  termsOfService: https://www.walkscore.com/professional/terms.php
+servers:
+- url: https://api.walkscore.com
+  description: Walk Score API
+security:
+- apiKey: []
+tags:
+- name: Cities
+  description: Supported cities list
+paths:
+  /transit/supported/cities/:
+    get:
+      operationId: listSupportedCities
+      summary: List Supported Cities
+      description: Returns a list of all cities supported by the Transit Score API, including city name, state (US) or country code (non-US), and estimated population. Use this to validate city/state combinations before requesting transit scores.
+      tags:
+      - Cities
+      parameters:
+      - name: wsapikey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Your Walk Score API key
+      responses:
+        '200':
+          description: Array of supported cities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SupportedCity'
+        '400':
+          description: Invalid API key
+components:
+  schemas:
+    SupportedCity:
+      type: object
+      properties:
+        city:
+          type: string
+          description: Canonical city name
+          example: Seattle
+        state:
+          type: string
+          description: Two-letter US state code (US cities only)
+          example: WA
+        country:
+          type: string
+          description: Two-letter ISO-3166 country code (non-US cities only)
+        population:
+          type: integer
+          description: Estimated city population
+          example: 737000
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: wsapikey
+      description: Walk Score API key, contact Walk Score to obtain

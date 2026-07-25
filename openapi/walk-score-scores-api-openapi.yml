@@ -1,0 +1,311 @@
+openapi: 3.0.3
+info:
+  title: Walk Score Cities Scores API
+  description: The Walk Score API returns Walk Score, Transit Score, and Bike Score for any location in the United States and Canada. Walk Score measures the walkability of any address on a scale from 0-100. Transit Score measures access to public transit and Bike Score measures bikeability. The API is used by real estate platforms, urban planning tools, commute calculators, and location intelligence applications.
+  version: 1.0.0
+  contact:
+    url: https://www.walkscore.com/professional/api.php
+  termsOfService: https://www.walkscore.com/professional/terms.php
+servers:
+- url: https://api.walkscore.com
+  description: Walk Score API
+security:
+- apiKey: []
+tags:
+- name: Scores
+  description: Walk Score, Transit Score, and Bike Score for locations
+paths:
+  /score:
+    get:
+      operationId: getWalkScore
+      summary: Get Walk Score
+      description: Returns the Walk Score, Transit Score, and Bike Score for a given location specified by coordinates and address. Walk Score is returned for all requests. Transit Score and Bike Score are optional and must be explicitly requested. Scores range from 0 (car-dependent) to 100 (walker's/transit/biker's paradise). Calls must be made from server-side scripts. API is supported in the United States and Canada.
+      tags:
+      - Scores
+      parameters:
+      - name: wsapikey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Your Walk Score API key
+      - name: lat
+        in: query
+        required: true
+        schema:
+          type: number
+          format: double
+        description: Latitude of the location
+        example: 47.6085
+      - name: lon
+        in: query
+        required: true
+        schema:
+          type: number
+          format: double
+        description: Longitude of the location
+        example: -122.3295
+      - name: address
+        in: query
+        required: true
+        schema:
+          type: string
+        description: URL-encoded street address of the location
+        example: 1119 8th Avenue Seattle WA
+      - name: transit
+        in: query
+        required: false
+        schema:
+          type: integer
+          enum:
+          - 0
+          - 1
+        description: Set to 1 to include Transit Score in the response
+      - name: bike
+        in: query
+        required: false
+        schema:
+          type: integer
+          enum:
+          - 0
+          - 1
+        description: Set to 1 to include Bike Score in the response
+      - name: format
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: xml
+        description: Response format. Defaults to XML if not specified
+      responses:
+        '200':
+          description: Walk Score response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalkScoreResponse'
+              example:
+                status: 1
+                walkscore: 98
+                description: Walker's Paradise
+                updated: '2026-05-03 01:24:22.000000'
+                logo_url: https://cdn.walk.sc/images/api-logo.png
+                more_info_icon: https://cdn.walk.sc/images/api-more-info.gif
+                more_info_link: https://www.redfin.com/how-walk-score-works
+                ws_link: https://www.walkscore.com/score/loc/lat=47.6085/lng=-122.3295/
+                help_link: https://www.walkscore.com/how-it-works/
+                snapped_lat: 47.6085
+                snapped_lon: -122.3295
+                transit:
+                  score: 100
+                  description: World-Class Transit
+                  summary: '273 nearby routes: 267 bus, 4 rail, 2 other'
+                  help_link: https://www.walkscore.com/how-it-works/
+                bike:
+                  score: 73
+                  description: Very Bikeable
+  /transit/score/:
+    get:
+      operationId: getTransitScore
+      summary: Get Transit Score
+      description: Returns a Transit Score (integer 0-100) and English description for a specific city and location. The score represents relative access to public transit. A score of 100 means World-Class Transit, while lower scores indicate less transit access. All successful requests return HTTP 200 with JSON.
+      tags:
+      - Scores
+      parameters:
+      - name: wsapikey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Your Walk Score API key
+      - name: lat
+        in: query
+        required: true
+        schema:
+          type: number
+          format: double
+        description: Latitude to score
+        example: 47.6101359
+      - name: lon
+        in: query
+        required: true
+        schema:
+          type: number
+          format: double
+        description: Longitude to score
+        example: -122.3420567
+      - name: city
+        in: query
+        required: true
+        schema:
+          type: string
+        description: City name
+        example: Seattle
+      - name: state
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Two-letter USPS state code (required for US cities)
+        example: WA
+      - name: country
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Two-letter ISO-3166 country code (required for non-US cities)
+      responses:
+        '200':
+          description: Transit score result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransitScoreResponse'
+              example:
+                scored_lat: 47.6101359
+                scored_lon: -122.3420567
+                transit_score: 100
+                description: World-Class
+                summary: '266 nearby routes: 260 bus, 4 rail, 2 other'
+                ws_link: https://www.walkscore.com/WA/Seattle
+                help_link: https://www.walkscore.com/transit-score-methodology.shtml
+        '400':
+          description: Unsupported city/state combination or invalid parameters
+components:
+  schemas:
+    BikeScoreSummary:
+      type: object
+      description: Bike Score summary, present when bike=1 is requested
+      properties:
+        score:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Bike Score from 0 to 100
+          example: 73
+        description:
+          type: string
+          description: Human-readable bikeability description
+          example: Very Bikeable
+    WalkScoreResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: 'Status code: 1=success, 2=score not yet available, 30=invalid coordinates, 31=score server internal error, 40=invalid API key, 41=quota exceeded, 42=IP blocked'
+          enum:
+          - 1
+          - 2
+          - 30
+          - 31
+          - 40
+          - 41
+          - 42
+        walkscore:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Walk Score from 0 (car-dependent) to 100 (walker's paradise)
+          example: 98
+        description:
+          type: string
+          description: Human-readable walkability description
+          example: Walker's Paradise
+        updated:
+          type: string
+          description: Timestamp when the score was last updated
+        logo_url:
+          type: string
+          format: uri
+          description: URL of the Walk Score branded logo for display
+        more_info_icon:
+          type: string
+          format: uri
+          description: URL for the more info icon image
+        more_info_link:
+          type: string
+          format: uri
+          description: Link for more information about the walk score
+        ws_link:
+          type: string
+          format: uri
+          description: Walk Score page URL for this location
+        help_link:
+          type: string
+          format: uri
+          description: Walk Score methodology documentation link
+        snapped_lat:
+          type: number
+          format: double
+          description: Snapped latitude (rounded to ~500-foot grid cell)
+        snapped_lon:
+          type: number
+          format: double
+          description: Snapped longitude (rounded to ~500-foot grid cell)
+        transit:
+          $ref: '#/components/schemas/TransitScoreSummary'
+        bike:
+          $ref: '#/components/schemas/BikeScoreSummary'
+    TransitScoreSummary:
+      type: object
+      description: Transit Score summary, present when transit=1 is requested
+      properties:
+        score:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Transit Score from 0 to 100
+          example: 100
+        description:
+          type: string
+          description: Human-readable transit quality description
+          example: World-Class Transit
+        summary:
+          type: string
+          description: Summary of nearby transit routes
+          example: '273 nearby routes: 267 bus, 4 rail, 2 other'
+        help_link:
+          type: string
+          format: uri
+          description: Transit Score methodology link
+    TransitScoreResponse:
+      type: object
+      properties:
+        scored_lat:
+          type: number
+          format: double
+          description: Scored latitude coordinate
+        scored_lon:
+          type: number
+          format: double
+          description: Scored longitude coordinate
+        transit_score:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Transit Score from 0 to 100
+        description:
+          type: string
+          description: Textual description of transit quality
+          example: World-Class
+        summary:
+          type: string
+          description: Summary of nearby route counts by category
+          example: '266 nearby routes: 260 bus, 4 rail, 2 other'
+        ws_link:
+          type: string
+          format: uri
+          description: Walk Score page URL for this location
+        help_link:
+          type: string
+          format: uri
+          description: Transit Score methodology documentation link
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: wsapikey
+      description: Walk Score API key, contact Walk Score to obtain

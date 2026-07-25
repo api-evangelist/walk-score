@@ -1,0 +1,297 @@
+openapi: 3.0.3
+info:
+  title: Walk Score Cities Stops API
+  description: The Walk Score API returns Walk Score, Transit Score, and Bike Score for any location in the United States and Canada. Walk Score measures the walkability of any address on a scale from 0-100. Transit Score measures access to public transit and Bike Score measures bikeability. The API is used by real estate platforms, urban planning tools, commute calculators, and location intelligence applications.
+  version: 1.0.0
+  contact:
+    url: https://www.walkscore.com/professional/api.php
+  termsOfService: https://www.walkscore.com/professional/terms.php
+servers:
+- url: https://api.walkscore.com
+  description: Walk Score API
+security:
+- apiKey: []
+tags:
+- name: Stops
+  description: Transit stop search and details
+paths:
+  /transit/search/stops/:
+    get:
+      operationId: searchTransitStops
+      summary: Search Transit Stops
+      description: Returns information about up to 16 transit stops near a given location, where each stop services a unique route. Each stop includes route details, distances, and summary text. Used to surface nearby transit options with route service information.
+      tags:
+      - Stops
+      parameters:
+      - name: wsapikey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Your Walk Score API key
+      - name: lat
+        in: query
+        required: true
+        schema:
+          type: number
+          format: double
+        description: Search latitude
+        example: 40.6678248
+      - name: lon
+        in: query
+        required: true
+        schema:
+          type: number
+          format: double
+        description: Search longitude
+        example: -73.8330133
+      responses:
+        '200':
+          description: Array of nearby transit stops with route information
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TransitStop'
+        '400':
+          description: Invalid parameters
+  /transit/search/network/:
+    get:
+      operationId: searchTransitNetwork
+      summary: Search Transit Network
+      description: Advanced API call that returns detailed information about all routes and stops within one mile of a location. Returns a comprehensive network object with routes dictionary and stops dictionary, where routes contain stop IDs and stops contain route IDs.
+      tags:
+      - Stops
+      parameters:
+      - name: wsapikey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Your Walk Score API key
+      - name: lat
+        in: query
+        required: true
+        schema:
+          type: number
+          format: double
+        description: Search latitude
+        example: 40.6678248
+      - name: lon
+        in: query
+        required: true
+        schema:
+          type: number
+          format: double
+        description: Search longitude
+        example: -73.8330133
+      responses:
+        '200':
+          description: Transit network with all routes and stops within one mile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransitNetwork'
+        '400':
+          description: Invalid parameters
+  /transit/stop/{stopId}/:
+    get:
+      operationId: getTransitStop
+      summary: Get Transit Stop
+      description: Returns details for a single transit stop by its identifier, including coordinates, name, and list of route IDs that serve the stop.
+      tags:
+      - Stops
+      parameters:
+      - name: stopId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Stop identifier (e.g. s17737)
+        example: s17737
+      - name: wsapikey
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Your Walk Score API key
+      responses:
+        '200':
+          description: Transit stop details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransitStopDetail'
+              example:
+                id: s17737
+                lat: 47.6107025
+                lon: -122.340332
+                name: 2nd Ave & Stewart St
+                route_ids:
+                - r415
+                - r282
+                - r403
+                - r375
+                - r367
+        '400':
+          description: Invalid stop ID
+components:
+  schemas:
+    TransitStopDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Stop identifier
+        lat:
+          type: number
+          format: double
+          description: Stop latitude
+        lon:
+          type: number
+          format: double
+          description: Stop longitude
+        name:
+          type: string
+          description: Stop name or intersection
+        route_ids:
+          type: array
+          items:
+            type: string
+          description: List of route IDs serving this stop
+    TransitRouteNetwork:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Route identifier
+        name:
+          type: string
+          description: Route name
+        category:
+          type: string
+          enum:
+          - Rail
+          - Bus
+          - Other
+          description: Transit category
+        stop_ids:
+          type: array
+          items:
+            type: string
+          description: List of stop IDs on this route
+    TransitStopNetwork:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Stop identifier
+        lat:
+          type: number
+          format: double
+          description: Stop latitude
+        lon:
+          type: number
+          format: double
+          description: Stop longitude
+        name:
+          type: string
+          description: Stop name
+        route_ids:
+          type: array
+          items:
+            type: string
+          description: List of route IDs serving this stop
+    TransitStop:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Stop identifier
+          example: s17737
+        lat:
+          type: number
+          format: double
+          description: Stop latitude
+        lon:
+          type: number
+          format: double
+          description: Stop longitude
+        name:
+          type: string
+          description: Stop name or intersection
+          example: 2nd Ave & Stewart St
+        distance:
+          type: number
+          format: double
+          description: Distance in miles from search point
+        summary_text:
+          type: string
+          description: Plain text description of stop and services
+        summary_html:
+          type: string
+          description: HTML-formatted description of stop and services
+        route_summary:
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteSummary'
+    RouteSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Route identifier
+        name:
+          type: string
+          description: Route name
+        short_name:
+          type: string
+          description: Short route name or number
+        long_name:
+          type: string
+          description: Full route name
+        category:
+          type: string
+          enum:
+          - Rail
+          - Bus
+          - Other
+          description: Transit category
+        agency:
+          type: string
+          description: Transit agency name
+        agency_url:
+          type: string
+          format: uri
+          description: Transit agency website
+        color:
+          type: string
+          description: Route color as hex value
+          example: 003087
+        text_color:
+          type: string
+          description: Route text color as hex value
+          example: ffffff
+        description:
+          type: string
+          description: Route description
+    TransitNetwork:
+      type: object
+      properties:
+        routes:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TransitRouteNetwork'
+          description: Map of route ID to route details including stop IDs
+        stops:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TransitStopNetwork'
+          description: Map of stop ID to stop details including route IDs
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: wsapikey
+      description: Walk Score API key, contact Walk Score to obtain
