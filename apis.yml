@@ -7,9 +7,22 @@ description: >-
   Transit API provides detailed transit data including nearby stops, route networks, and supported cities, enabling
   comprehensive transportation accessibility analysis.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/walk-score.png
 tags:
   - Walkability
   - Transit
@@ -23,51 +36,74 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/walk-score/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-  - aid: walk-score:walk-score-api
-    name: Walk Score API
-    description: >-
-      Returns the Walk Score, Transit Score, and Bike Score for any location specified by latitude/longitude coordinates
-      and address. Walk Score measures walkability on a scale from 0 (car-dependent) to 100 (walker's paradise).
-      Optionally returns Transit Score and Bike Score in the same response. Supported in the United States and Canada.
-      API calls must originate from server-side scripts.
-    humanURL: https://www.walkscore.com/professional/api.php
-    baseURL: https://api.walkscore.com
-    tags:
-      - Walkability
-      - Walk Score
-      - Transit Score
-      - Bike Score
-      - Location Intelligence
-    properties:
-      - type: Documentation
-        url: https://www.walkscore.com/professional/api.php
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/walk-score/refs/heads/main/openapi/walk-score-openapi.yml
-      - type: JSONSchema
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/walk-score/refs/heads/main/json-schema/walk-score-score-schema.json
-  - aid: walk-score:walk-score-transit-api
-    name: Walk Score Transit API
-    description: >-
-      Provides detailed public transit data for locations in supported cities including Transit Scores, nearby transit
-      stops with route information, complete transit network data, individual stop and route details, and a list of
-      supported cities. Used for comprehensive transit accessibility analysis in real estate, city planning, and commute
-      optimization applications.
-    humanURL: https://www.walkscore.com/professional/public-transit-api.php
-    baseURL: https://transit.walkscore.com
-    tags:
-      - Public Transit
-      - Transit Data
-      - Transit Score
-      - Bus
-      - Rail
-      - Transportation
-    properties:
-      - type: Documentation
-        url: https://www.walkscore.com/professional/public-transit-api.php
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/walk-score/refs/heads/main/openapi/walk-score-transit-openapi.yml
+- aid: walk-score:walk-score-cities-api
+  name: Walk Score Cities API
+  description: Supported cities list
+  humanURL: https://www.walkscore.com/professional/api.php
+  baseURL: https://api.walkscore.com
+  tags:
+  - Cities
+  properties:
+  - type: OpenAPI
+    url: openapi/walk-score-cities-api-openapi.yml
+  - type: Documentation
+    url: https://www.walkscore.com/professional/api.php
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/walk-score/refs/heads/main/json-schema/walk-score-score-schema.json
+  - type: Documentation
+    url: https://www.walkscore.com/professional/public-transit-api.php
+- aid: walk-score:walk-score-routes-api
+  name: Walk Score Routes API
+  description: Transit route details
+  humanURL: https://www.walkscore.com/professional/api.php
+  baseURL: https://api.walkscore.com
+  tags:
+  - Routes
+  properties:
+  - type: OpenAPI
+    url: openapi/walk-score-routes-api-openapi.yml
+  - type: Documentation
+    url: https://www.walkscore.com/professional/api.php
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/walk-score/refs/heads/main/json-schema/walk-score-score-schema.json
+  - type: Documentation
+    url: https://www.walkscore.com/professional/public-transit-api.php
+- aid: walk-score:walk-score-scores-api
+  name: Walk Score Scores API
+  description: Walk Score, Transit Score, and Bike Score for locations
+  humanURL: https://www.walkscore.com/professional/api.php
+  baseURL: https://api.walkscore.com
+  tags:
+  - Scores
+  properties:
+  - type: OpenAPI
+    url: openapi/walk-score-scores-api-openapi.yml
+  - type: Documentation
+    url: https://www.walkscore.com/professional/api.php
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/walk-score/refs/heads/main/json-schema/walk-score-score-schema.json
+  - type: Documentation
+    url: https://www.walkscore.com/professional/public-transit-api.php
+- aid: walk-score:walk-score-stops-api
+  name: Walk Score Stops API
+  description: Transit stop search and details
+  humanURL: https://www.walkscore.com/professional/api.php
+  baseURL: https://api.walkscore.com
+  tags:
+  - Stops
+  properties:
+  - type: OpenAPI
+    url: openapi/walk-score-stops-api-openapi.yml
+  - type: Documentation
+    url: https://www.walkscore.com/professional/api.php
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/walk-score/refs/heads/main/json-schema/walk-score-score-schema.json
+  - type: Documentation
+    url: https://www.walkscore.com/professional/public-transit-api.php
 common:
   - type: AgenticAccess
     url: agentic-access/walk-score-agentic-access.yml
