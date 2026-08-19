@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Walk Score Cities Stops API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "wsapikey",
+      "value": "{{wsapikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stops",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Transit Stops",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.walkscore.com/transit/search/stops/",
+            "params": [
+              {
+                "name": "wsapikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Walk Score API key"
+              },
+              {
+                "name": "lat",
+                "value": "40.6678248",
+                "type": "query",
+                "description": "Search latitude"
+              },
+              {
+                "name": "lon",
+                "value": "-73.8330133",
+                "type": "query",
+                "description": "Search longitude"
+              }
+            ]
+          },
+          "docs": "Returns information about up to 16 transit stops near a given location, where each stop services a unique route. Each stop includes route details, distances, and summary text. Used to surface nearby transit options with route service information."
+        },
+        {
+          "info": {
+            "name": "Search Transit Network",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.walkscore.com/transit/search/network/",
+            "params": [
+              {
+                "name": "wsapikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Walk Score API key"
+              },
+              {
+                "name": "lat",
+                "value": "40.6678248",
+                "type": "query",
+                "description": "Search latitude"
+              },
+              {
+                "name": "lon",
+                "value": "-73.8330133",
+                "type": "query",
+                "description": "Search longitude"
+              }
+            ]
+          },
+          "docs": "Advanced API call that returns detailed information about all routes and stops within one mile of a location. Returns a comprehensive network object with routes dictionary and stops dictionary, where routes contain stop IDs and stops contain route IDs."
+        },
+        {
+          "info": {
+            "name": "Get Transit Stop",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.walkscore.com/transit/stop/:stopId/",
+            "params": [
+              {
+                "name": "stopId",
+                "value": "s17737",
+                "type": "path",
+                "description": "Stop identifier (e.g. s17737)"
+              },
+              {
+                "name": "wsapikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Walk Score API key"
+              }
+            ]
+          },
+          "docs": "Returns details for a single transit stop by its identifier, including coordinates, name, and list of route IDs that serve the stop."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,206 @@
+{
+  "item": [
+    {
+      "id": "6dd0b9ff-6c51-4da8-b036-516eb5d23fbc",
+      "name": "Routes",
+      "description": {
+        "content": "Transit route details",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "887a7cc7-afed-41c7-9825-7a60d7d37b31",
+          "name": "Get Transit Route",
+          "request": {
+            "name": "Get Transit Route",
+            "description": {
+              "content": "Returns details for a single transit route by its identifier, including name, category (Rail/Bus/Other), agency information, color branding, stop IDs, and WKT geometry string for the route path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transit",
+                "route",
+                ":routeId",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "wsapikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Walk Score API key"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "routeId",
+                  "description": "(Required) Route identifier (e.g. r403)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "240df3d8-966a-4e87-9cdb-f3097790410f",
+              "name": "Transit route details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transit",
+                    "route",
+                    ":routeId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wsapikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wsapikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) Route identifier (e.g. r403)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"short_name\": \"string\",\n  \"long_name\": \"string\",\n  \"category\": \"Rail\",\n  \"agency\": \"string\",\n  \"agency_url\": \"https://VUUkYpylLYpPbWboO.kqtJV0QwJfyMebOtEWWvf5h3Ku7KuEqC5UTZdeudDRy5\",\n  \"color\": \"string\",\n  \"text_color\": \"string\",\n  \"description\": \"string\",\n  \"stop_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"geometry_wkt\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acc809b2-aa92-4989-9f07-baec798b5f7e",
+              "name": "Invalid route ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transit",
+                    "route",
+                    ":routeId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wsapikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wsapikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) Route identifier (e.g. r403)"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.walkscore.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "wsapikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6940cd11-ab67-46a6-993f-0ce0a2134bf8",
+    "name": "Walk Score Cities Routes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Walk Score API returns Walk Score, Transit Score, and Bike Score for any location in the United States and Canada. Walk Score measures the walkability of any address on a scale from 0-100. Transit Score measures access to public transit and Bike Score measures bikeability. The API is used by real estate platforms, urban planning tools, commute calculators, and location intelligence applications.",
+      "type": "text/plain"
+    }
+  }
+}

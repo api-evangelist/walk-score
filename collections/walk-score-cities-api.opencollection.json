@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Walk Score Cities API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "wsapikey",
+      "value": "{{wsapikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Supported Cities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.walkscore.com/transit/supported/cities/",
+            "params": [
+              {
+                "name": "wsapikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Walk Score API key"
+              }
+            ]
+          },
+          "docs": "Returns a list of all cities supported by the Transit Score API, including city name, state (US) or country code (non-US), and estimated population. Use this to validate city/state combinations before requesting transit scores."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

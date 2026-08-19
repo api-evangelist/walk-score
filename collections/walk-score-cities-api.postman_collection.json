@@ -1,0 +1,182 @@
+{
+  "item": [
+    {
+      "id": "88d1d2eb-66c7-48d5-884b-37dc2c72f3a9",
+      "name": "Cities",
+      "description": {
+        "content": "Supported cities list",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cd9b9867-4933-4711-a615-70a3818d6165",
+          "name": "List Supported Cities",
+          "request": {
+            "name": "List Supported Cities",
+            "description": {
+              "content": "Returns a list of all cities supported by the Transit Score API, including city name, state (US) or country code (non-US), and estimated population. Use this to validate city/state combinations before requesting transit scores.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transit",
+                "supported",
+                "cities",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "wsapikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Walk Score API key"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8605bc58-117b-429f-ad68-f1dca2571ff7",
+              "name": "Array of supported cities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transit",
+                    "supported",
+                    "cities",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wsapikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wsapikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"city\": \"Seattle\",\n    \"state\": \"WA\",\n    \"country\": \"string\",\n    \"population\": 737000\n  },\n  {\n    \"city\": \"Seattle\",\n    \"state\": \"WA\",\n    \"country\": \"string\",\n    \"population\": 737000\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2ba5765-9940-402e-a8c9-d07be05ba5fe",
+              "name": "Invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transit",
+                    "supported",
+                    "cities",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wsapikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wsapikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.walkscore.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "wsapikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bf1fae16-25c3-4336-8561-bfc305c00b11",
+    "name": "Walk Score Cities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Walk Score API returns Walk Score, Transit Score, and Bike Score for any location in the United States and Canada. Walk Score measures the walkability of any address on a scale from 0-100. Transit Score measures access to public transit and Bike Score measures bikeability. The API is used by real estate platforms, urban planning tools, commute calculators, and location intelligence applications.",
+      "type": "text/plain"
+    }
+  }
+}

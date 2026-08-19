@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Walk Score Cities Routes API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "wsapikey",
+      "value": "{{wsapikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Routes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Transit Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.walkscore.com/transit/route/:routeId/",
+            "params": [
+              {
+                "name": "routeId",
+                "value": "r403",
+                "type": "path",
+                "description": "Route identifier (e.g. r403)"
+              },
+              {
+                "name": "wsapikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Walk Score API key"
+              }
+            ]
+          },
+          "docs": "Returns details for a single transit route by its identifier, including name, category (Rail/Bus/Other), agency information, color branding, stop IDs, and WKT geometry string for the route path."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

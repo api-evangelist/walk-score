@@ -1,0 +1,395 @@
+{
+  "item": [
+    {
+      "id": "fbe8337c-5ed1-4939-ada7-31e7b68fffef",
+      "name": "Scores",
+      "description": {
+        "content": "Walk Score, Transit Score, and Bike Score for locations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f9a05441-9d1a-49ff-af59-8e1880f6c41d",
+          "name": "Get Walk Score",
+          "request": {
+            "name": "Get Walk Score",
+            "description": {
+              "content": "Returns the Walk Score, Transit Score, and Bike Score for a given location specified by coordinates and address. Walk Score is returned for all requests. Transit Score and Bike Score are optional and must be explicitly requested. Scores range from 0 (car-dependent) to 100 (walker's/transit/biker's paradise). Calls must be made from server-side scripts. API is supported in the United States and Canada.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "score"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "wsapikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Walk Score API key"
+                },
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<double>",
+                  "description": "(Required) Latitude of the location"
+                },
+                {
+                  "disabled": false,
+                  "key": "lon",
+                  "value": "<double>",
+                  "description": "(Required) Longitude of the location"
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "(Required) URL-encoded street address of the location"
+                },
+                {
+                  "disabled": false,
+                  "key": "transit",
+                  "value": "<integer>",
+                  "description": "Set to 1 to include Transit Score in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "bike",
+                  "value": "<integer>",
+                  "description": "Set to 1 to include Bike Score in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "xml",
+                  "description": "Response format. Defaults to XML if not specified"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7eb363d2-e3cb-47a3-811f-58e25ec4f9b4",
+              "name": "Walk Score response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wsapikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "47.6085"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.3295"
+                    },
+                    {
+                      "key": "address",
+                      "value": "1119 8th Avenue Seattle WA"
+                    },
+                    {
+                      "key": "transit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "bike",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "xml"
+                    },
+                    {
+                      "key": "wsapikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1,\n  \"walkscore\": 98,\n  \"description\": \"Walker's Paradise\",\n  \"updated\": \"2026-05-03 01:24:22.000000\",\n  \"logo_url\": \"https://cdn.walk.sc/images/api-logo.png\",\n  \"more_info_icon\": \"https://cdn.walk.sc/images/api-more-info.gif\",\n  \"more_info_link\": \"https://www.redfin.com/how-walk-score-works\",\n  \"ws_link\": \"https://www.walkscore.com/score/loc/lat=47.6085/lng=-122.3295/\",\n  \"help_link\": \"https://www.walkscore.com/how-it-works/\",\n  \"snapped_lat\": 47.6085,\n  \"snapped_lon\": -122.3295,\n  \"transit\": {\n    \"score\": 100,\n    \"description\": \"World-Class Transit\",\n    \"summary\": \"273 nearby routes: 267 bus, 4 rail, 2 other\",\n    \"help_link\": \"https://www.walkscore.com/how-it-works/\"\n  },\n  \"bike\": {\n    \"score\": 73,\n    \"description\": \"Very Bikeable\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ffec8785-bf89-420b-a132-3a853b4177c6",
+          "name": "Get Transit Score",
+          "request": {
+            "name": "Get Transit Score",
+            "description": {
+              "content": "Returns a Transit Score (integer 0-100) and English description for a specific city and location. The score represents relative access to public transit. A score of 100 means World-Class Transit, while lower scores indicate less transit access. All successful requests return HTTP 200 with JSON.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transit",
+                "score",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "wsapikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Walk Score API key"
+                },
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<double>",
+                  "description": "(Required) Latitude to score"
+                },
+                {
+                  "disabled": false,
+                  "key": "lon",
+                  "value": "<double>",
+                  "description": "(Required) Longitude to score"
+                },
+                {
+                  "disabled": false,
+                  "key": "city",
+                  "value": "<string>",
+                  "description": "(Required) City name"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Two-letter USPS state code (required for US cities)"
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "Two-letter ISO-3166 country code (required for non-US cities)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "953a9d2d-f4c9-4d5f-95cb-181b708fb274",
+              "name": "Transit score result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transit",
+                    "score",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wsapikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "47.6101359"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.3420567"
+                    },
+                    {
+                      "key": "city",
+                      "value": "Seattle"
+                    },
+                    {
+                      "key": "state",
+                      "value": "WA"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wsapikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"scored_lat\": 47.6101359,\n  \"scored_lon\": -122.3420567,\n  \"transit_score\": 100,\n  \"description\": \"World-Class\",\n  \"summary\": \"266 nearby routes: 260 bus, 4 rail, 2 other\",\n  \"ws_link\": \"https://www.walkscore.com/WA/Seattle\",\n  \"help_link\": \"https://www.walkscore.com/transit-score-methodology.shtml\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1620985-5cf1-48d7-8b6b-d67680e4d962",
+              "name": "Unsupported city/state combination or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transit",
+                    "score",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wsapikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "47.6101359"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.3420567"
+                    },
+                    {
+                      "key": "city",
+                      "value": "Seattle"
+                    },
+                    {
+                      "key": "state",
+                      "value": "WA"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "wsapikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.walkscore.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "wsapikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ac3b597f-349d-496c-9fed-189b6fe1e45f",
+    "name": "Walk Score Cities Scores API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Walk Score API returns Walk Score, Transit Score, and Bike Score for any location in the United States and Canada. Walk Score measures the walkability of any address on a scale from 0-100. Transit Score measures access to public transit and Bike Score measures bikeability. The API is used by real estate platforms, urban planning tools, commute calculators, and location intelligence applications.",
+      "type": "text/plain"
+    }
+  }
+}
