@@ -1,14 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Walk Score Cities Routes API
-  description: The Walk Score API returns Walk Score, Transit Score, and Bike Score for any location in the United States and Canada. Walk Score measures the walkability of any address on a scale from 0-100. Transit Score measures access to public transit and Bike Score measures bikeability. The API is used by real estate platforms, urban planning tools, commute calculators, and location intelligence applications.
+  title: Walk Score Transit Routes API
+  description: The Walk Score Public Transit API provides detailed transit data including Transit Scores, nearby stops, route networks, stop details, and route details. The API returns information about bus, rail, and other transit options within one mile of any location. Used by real estate platforms, commute calculators, and urban planning applications to surface public transportation options.
   version: 1.0.0
   contact:
-    url: https://www.walkscore.com/professional/api.php
+    url: https://www.walkscore.com/professional/public-transit-api.php
   termsOfService: https://www.walkscore.com/professional/terms.php
 servers:
-- url: https://api.walkscore.com
-  description: Walk Score API
+- url: https://transit.walkscore.com
+  description: Walk Score Transit API
 security:
 - apiKey: []
 tags:

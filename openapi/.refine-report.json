@@ -1,20 +1,28 @@
 {
   "provider": "walk-score",
   "sources": [
-    "walk-score-cities-api-openapi.yml",
-    "walk-score-routes-api-openapi.yml",
-    "walk-score-scores-api-openapi.yml",
-    "walk-score-stops-api-openapi.yml"
+    "_original/walk-score-openapi.yml",
+    "_original/walk-score-transit-openapi.yml"
   ],
   "outputs": [
+    "walk-score-scores-api-openapi.yml",
     "walk-score-cities-api-openapi.yml",
     "walk-score-routes-api-openapi.yml",
-    "walk-score-scores-api-openapi.yml",
     "walk-score-stops-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "walk-score-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "walk-score-transit-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "tag 'Scores' spans 2 source specs (walk-score-openapi.yml, walk-score-transit-openapi.yml): per-path servers applied"
+  ],
+  "skipped": [
+    "walk-score-cities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "walk-score-routes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "walk-score-scores-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "walk-score-stops-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
