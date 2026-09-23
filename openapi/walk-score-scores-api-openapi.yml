@@ -182,6 +182,28 @@ paths:
       description: Walk Score Transit API
 components:
   schemas:
+    TransitScoreSummary:
+      type: object
+      description: Transit Score summary, present when transit=1 is requested
+      properties:
+        score:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Transit Score from 0 to 100
+          example: 100
+        description:
+          type: string
+          description: Human-readable transit quality description
+          example: World-Class Transit
+        summary:
+          type: string
+          description: Summary of nearby transit routes
+          example: '273 nearby routes: 267 bus, 4 rail, 2 other'
+        help_link:
+          type: string
+          format: uri
+          description: Transit Score methodology link
     BikeScoreSummary:
       type: object
       description: Bike Score summary, present when bike=1 is requested
@@ -255,28 +277,6 @@ components:
           $ref: '#/components/schemas/TransitScoreSummary'
         bike:
           $ref: '#/components/schemas/BikeScoreSummary'
-    TransitScoreSummary:
-      type: object
-      description: Transit Score summary, present when transit=1 is requested
-      properties:
-        score:
-          type: integer
-          minimum: 0
-          maximum: 100
-          description: Transit Score from 0 to 100
-          example: 100
-        description:
-          type: string
-          description: Human-readable transit quality description
-          example: World-Class Transit
-        summary:
-          type: string
-          description: Summary of nearby transit routes
-          example: '273 nearby routes: 267 bus, 4 rail, 2 other'
-        help_link:
-          type: string
-          format: uri
-          description: Transit Score methodology link
     TransitScoreResponse:
       type: object
       properties:

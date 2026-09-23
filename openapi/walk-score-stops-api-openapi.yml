@@ -138,49 +138,19 @@ paths:
           description: Invalid stop ID
 components:
   schemas:
-    TransitRouteNetwork:
+    TransitNetwork:
       type: object
       properties:
-        id:
-          type: string
-          description: Route identifier
-        name:
-          type: string
-          description: Route name
-        category:
-          type: string
-          enum:
-          - Rail
-          - Bus
-          - Other
-          description: Transit category
-        stop_ids:
-          type: array
-          items:
-            type: string
-          description: List of stop IDs on this route
-    TransitStopNetwork:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Stop identifier
-        lat:
-          type: number
-          format: double
-          description: Stop latitude
-        lon:
-          type: number
-          format: double
-          description: Stop longitude
-        name:
-          type: string
-          description: Stop name
-        route_ids:
-          type: array
-          items:
-            type: string
-          description: List of route IDs serving this stop
+        routes:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TransitRouteNetwork'
+          description: Map of route ID to route details including stop IDs
+        stops:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TransitStopNetwork'
+          description: Map of stop ID to stop details including route IDs
     TransitStop:
       type: object
       properties:
@@ -214,6 +184,71 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RouteSummary'
+    TransitRouteNetwork:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Route identifier
+        name:
+          type: string
+          description: Route name
+        category:
+          type: string
+          enum:
+          - Rail
+          - Bus
+          - Other
+          description: Transit category
+        stop_ids:
+          type: array
+          items:
+            type: string
+          description: List of stop IDs on this route
+    TransitStopDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Stop identifier
+        lat:
+          type: number
+          format: double
+          description: Stop latitude
+        lon:
+          type: number
+          format: double
+          description: Stop longitude
+        name:
+          type: string
+          description: Stop name or intersection
+        route_ids:
+          type: array
+          items:
+            type: string
+          description: List of route IDs serving this stop
+    TransitStopNetwork:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Stop identifier
+        lat:
+          type: number
+          format: double
+          description: Stop latitude
+        lon:
+          type: number
+          format: double
+          description: Stop longitude
+        name:
+          type: string
+          description: Stop name
+        route_ids:
+          type: array
+          items:
+            type: string
+          description: List of route IDs serving this stop
     RouteSummary:
       type: object
       properties:
@@ -254,41 +289,6 @@ components:
         description:
           type: string
           description: Route description
-    TransitStopDetail:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Stop identifier
-        lat:
-          type: number
-          format: double
-          description: Stop latitude
-        lon:
-          type: number
-          format: double
-          description: Stop longitude
-        name:
-          type: string
-          description: Stop name or intersection
-        route_ids:
-          type: array
-          items:
-            type: string
-          description: List of route IDs serving this stop
-    TransitNetwork:
-      type: object
-      properties:
-        routes:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/TransitRouteNetwork'
-          description: Map of route ID to route details including stop IDs
-        stops:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/TransitStopNetwork'
-          description: Map of stop ID to stop details including route IDs
   securitySchemes:
     apiKey:
       type: apiKey
