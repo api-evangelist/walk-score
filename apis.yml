@@ -41,7 +41,7 @@ tags:
   - Transit
   - Bikeability
   - Location
-  - Real-Estate
+  - Real Estate
   - Urban Planning
   - Transportation
 tags_raw:
@@ -52,6 +52,7 @@ tags_raw:
   - Real Estate
   - Urban Planning
   - Transportation
+  - Real-Estate
 created: '2025-03-01'
 modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/walk-score/refs/heads/main/apis.yml

@@ -138,6 +138,46 @@ paths:
           description: Invalid stop ID
 components:
   schemas:
+    RouteSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Route identifier
+        name:
+          type: string
+          description: Route name
+        short_name:
+          type: string
+          description: Short route name or number
+        long_name:
+          type: string
+          description: Full route name
+        category:
+          type: string
+          enum:
+          - Rail
+          - Bus
+          - Other
+          description: Transit category
+        agency:
+          type: string
+          description: Transit agency name
+        agency_url:
+          type: string
+          format: uri
+          description: Transit agency website
+        color:
+          type: string
+          description: Route color as hex value
+          example: 003087
+        text_color:
+          type: string
+          description: Route text color as hex value
+          example: ffffff
+        description:
+          type: string
+          description: Route description
     TransitNetwork:
       type: object
       properties:
@@ -151,6 +191,50 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/TransitStopNetwork'
           description: Map of stop ID to stop details including route IDs
+    TransitStopNetwork:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Stop identifier
+        lat:
+          type: number
+          format: double
+          description: Stop latitude
+        lon:
+          type: number
+          format: double
+          description: Stop longitude
+        name:
+          type: string
+          description: Stop name
+        route_ids:
+          type: array
+          items:
+            type: string
+          description: List of route IDs serving this stop
+    TransitStopDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Stop identifier
+        lat:
+          type: number
+          format: double
+          description: Stop latitude
+        lon:
+          type: number
+          format: double
+          description: Stop longitude
+        name:
+          type: string
+          description: Stop name or intersection
+        route_ids:
+          type: array
+          items:
+            type: string
+          description: List of route IDs serving this stop
     TransitStop:
       type: object
       properties:
@@ -205,90 +289,6 @@ components:
           items:
             type: string
           description: List of stop IDs on this route
-    TransitStopDetail:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Stop identifier
-        lat:
-          type: number
-          format: double
-          description: Stop latitude
-        lon:
-          type: number
-          format: double
-          description: Stop longitude
-        name:
-          type: string
-          description: Stop name or intersection
-        route_ids:
-          type: array
-          items:
-            type: string
-          description: List of route IDs serving this stop
-    TransitStopNetwork:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Stop identifier
-        lat:
-          type: number
-          format: double
-          description: Stop latitude
-        lon:
-          type: number
-          format: double
-          description: Stop longitude
-        name:
-          type: string
-          description: Stop name
-        route_ids:
-          type: array
-          items:
-            type: string
-          description: List of route IDs serving this stop
-    RouteSummary:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Route identifier
-        name:
-          type: string
-          description: Route name
-        short_name:
-          type: string
-          description: Short route name or number
-        long_name:
-          type: string
-          description: Full route name
-        category:
-          type: string
-          enum:
-          - Rail
-          - Bus
-          - Other
-          description: Transit category
-        agency:
-          type: string
-          description: Transit agency name
-        agency_url:
-          type: string
-          format: uri
-          description: Transit agency website
-        color:
-          type: string
-          description: Route color as hex value
-          example: 003087
-        text_color:
-          type: string
-          description: Route text color as hex value
-          example: ffffff
-        description:
-          type: string
-          description: Route description
   securitySchemes:
     apiKey:
       type: apiKey
