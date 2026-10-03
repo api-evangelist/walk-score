@@ -241,6 +241,20 @@ components:
           $ref: '#/components/schemas/TransitScoreSummary'
         bike:
           $ref: '#/components/schemas/BikeScoreSummary'
+    BikeScoreSummary:
+      type: object
+      description: Bike Score summary, present when bike=1 is requested
+      properties:
+        score:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Bike Score from 0 to 100
+          example: 73
+        description:
+          type: string
+          description: Human-readable bikeability description
+          example: Very Bikeable
     TransitScoreSummary:
       type: object
       description: Transit Score summary, present when transit=1 is requested
@@ -263,20 +277,6 @@ components:
           type: string
           format: uri
           description: Transit Score methodology link
-    BikeScoreSummary:
-      type: object
-      description: Bike Score summary, present when bike=1 is requested
-      properties:
-        score:
-          type: integer
-          minimum: 0
-          maximum: 100
-          description: Bike Score from 0 to 100
-          example: 73
-        description:
-          type: string
-          description: Human-readable bikeability description
-          example: Very Bikeable
     TransitScoreResponse:
       type: object
       properties:
