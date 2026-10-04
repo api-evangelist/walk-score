@@ -138,13 +138,12 @@ paths:
           description: Invalid stop ID
 components:
   schemas:
-    TransitStop:
+    TransitStopDetail:
       type: object
       properties:
         id:
           type: string
           description: Stop identifier
-          example: s17737
         lat:
           type: number
           format: double
@@ -156,21 +155,67 @@ components:
         name:
           type: string
           description: Stop name or intersection
-          example: 2nd Ave & Stewart St
-        distance:
-          type: number
-          format: double
-          description: Distance in miles from search point
-        summary_text:
-          type: string
-          description: Plain text description of stop and services
-        summary_html:
-          type: string
-          description: HTML-formatted description of stop and services
-        route_summary:
+        route_ids:
           type: array
           items:
-            $ref: '#/components/schemas/RouteSummary'
+            type: string
+          description: List of route IDs serving this stop
+    TransitRouteNetwork:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Route identifier
+        name:
+          type: string
+          description: Route name
+        category:
+          type: string
+          enum:
+          - Rail
+          - Bus
+          - Other
+          description: Transit category
+        stop_ids:
+          type: array
+          items:
+            type: string
+          description: List of stop IDs on this route
+    TransitNetwork:
+      type: object
+      properties:
+        routes:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TransitRouteNetwork'
+          description: Map of route ID to route details including stop IDs
+        stops:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TransitStopNetwork'
+          description: Map of stop ID to stop details including route IDs
+    TransitStopNetwork:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Stop identifier
+        lat:
+          type: number
+          format: double
+          description: Stop latitude
+        lon:
+          type: number
+          format: double
+          description: Stop longitude
+        name:
+          type: string
+          description: Stop name
+        route_ids:
+          type: array
+          items:
+            type: string
+          description: List of route IDs serving this stop
     RouteSummary:
       type: object
       properties:
@@ -211,55 +256,13 @@ components:
         description:
           type: string
           description: Route description
-    TransitRouteNetwork:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Route identifier
-        name:
-          type: string
-          description: Route name
-        category:
-          type: string
-          enum:
-          - Rail
-          - Bus
-          - Other
-          description: Transit category
-        stop_ids:
-          type: array
-          items:
-            type: string
-          description: List of stop IDs on this route
-    TransitStopNetwork:
+    TransitStop:
       type: object
       properties:
         id:
           type: string
           description: Stop identifier
-        lat:
-          type: number
-          format: double
-          description: Stop latitude
-        lon:
-          type: number
-          format: double
-          description: Stop longitude
-        name:
-          type: string
-          description: Stop name
-        route_ids:
-          type: array
-          items:
-            type: string
-          description: List of route IDs serving this stop
-    TransitStopDetail:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Stop identifier
+          example: s17737
         lat:
           type: number
           format: double
@@ -271,24 +274,21 @@ components:
         name:
           type: string
           description: Stop name or intersection
-        route_ids:
+          example: 2nd Ave & Stewart St
+        distance:
+          type: number
+          format: double
+          description: Distance in miles from search point
+        summary_text:
+          type: string
+          description: Plain text description of stop and services
+        summary_html:
+          type: string
+          description: HTML-formatted description of stop and services
+        route_summary:
           type: array
           items:
-            type: string
-          description: List of route IDs serving this stop
-    TransitNetwork:
-      type: object
-      properties:
-        routes:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/TransitRouteNetwork'
-          description: Map of route ID to route details including stop IDs
-        stops:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/TransitStopNetwork'
-          description: Map of stop ID to stop details including route IDs
+            $ref: '#/components/schemas/RouteSummary'
   securitySchemes:
     apiKey:
       type: apiKey
