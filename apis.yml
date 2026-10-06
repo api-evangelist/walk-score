@@ -54,7 +54,7 @@ tags_raw:
   - Transportation
   - Real-Estate
 created: '2025-03-01'
-modified: '2026-05-19'
+modified: '2026-10-06'
 url: https://raw.githubusercontent.com/api-evangelist/walk-score/refs/heads/main/apis.yml
 specificationVersion: '0.23'
 apis:
@@ -127,6 +127,8 @@ apis:
   - type: Documentation
     url: https://www.walkscore.com/professional/public-transit-api.php
 common:
+  - url: https://www.walkscore.com/press/
+    type: Blog
   - type: AgenticAccess
     url: agentic-access/walk-score-agentic-access.yml
   - type: DomainSecurity
